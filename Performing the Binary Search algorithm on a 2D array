@@ -1,0 +1,59 @@
+""" Question:
+Write a Python program that implements a binary search algorithm to search for a specific key element in a two-dimensional array.
+The program should prompt the user to enter the dimensions of the 2D array (number of rows and columns) and then take input for the elements of the array. 
+Afterward, the user should be asked to input the key element to be searched. If the key element is found in the array, the program should output the row and column indices where the element is located. 
+Otherwise, it should display a message indicating that the element is not present in the array.
+
+Test Cases:
+1. Input:
+   Enter the number of rows and columns: 3 4
+   Enter elements of the 2D array:
+   1 3 5 7
+   10 11 16 20
+   23 30 34 50
+   Enter the element to search for: 16
+   Output:
+   The element 16 is found at row 1 and column 2.
+
+2. Input:
+   Enter the number of rows and columns: 2 3
+   Enter elements of the 2D array:
+   4 6 8
+   12 14 18
+   Enter the element to search for: 10
+   Output:
+   Not found.               """
+
+
+solution:
+
+## 
+def TwoD_array(arr, key):
+    m = len(arr)
+    if m == 0:
+        return False
+    n = len(arr[0])
+    left, right = 0, n * m - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        mid_element = arr[mid // n][mid % n]
+        if key == mid_element:
+            row_index = mid // n
+            col_index = mid % n
+            return row_index, col_index
+        elif key > mid_element:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return False
+
+## main function
+row, column = map(int, input('enter the no. of rows and columns: ').split())
+arr = [list(map(int, input().split())) for _ in range(row)]  # Corrected the list comprehension
+key = int(input("enter the key value: "))
+x = TwoD_array(arr, key)
+if x:
+    row_index, col_index = x
+    print(f"Found at row {row_index} and column {col_index}.")
+else:
+    print("Not found.")
