@@ -1,0 +1,48 @@
+""" Question: By amazon
+
+You are given a list of stock prices for a particular stock over a period of time. The `best_price` function provided takes this list as input and aims to find the best times to buy and sell the stock to maximize the profit.
+
+The `best_price` function uses a simple algorithm to iterate through the list of prices and determine the maximum profit that can be obtained by buying at one index and selling at another. The function returns three values: the maximum profit, the index at which to buy the stock, and the index at which to sell the stock.
+
+You are required to create test cases for this function to verify its correctness and efficiency. Write at least three test cases with different scenarios to evaluate the function's performance and ensure it handles various situations correctly. Please consider edge cases and typical scenarios that may occur in real-world stock data.
+
+Test Case 1:
+Input: [10, 20, 30, 40, 50, 60, 70]
+Expected Output: The maximum profit is: 60; To achieve this profit, buy at index 0 and sell at index 6.
+
+Test Case 2:
+Input: [100, 90, 80, 70, 60, 50, 40]
+Expected Output: The maximum profit is: 0; To achieve this profit, buy at index 0 and sell at index 0.
+
+Test Case 3:
+Input: [50, 40, 30, 20, 10]
+Expected Output: The maximum profit is: 0; To achieve this profit, buy at index 0 and sell at index 0.
+
+You may add more test cases if needed to cover additional scenarios and ensure the function behaves correctly in various situations.  """
+
+
+Solution :
+
+
+def best_price(price):
+    min_price = float('inf')
+    max_price = 0
+    buy_index = 0
+    sell_index = 0
+
+    for i in range(len(price)):
+        if price[i] < min_price:
+            min_price = price[i]
+            buy_index = i
+        
+        elif price[i] - min_price > max_price:
+            max_price = price[i] - min_price
+            sell_index = i
+
+    return max_price, buy_index, sell_index
+
+price = list(map(int, input().split()))
+profit, buy_index, sell_index = best_price(price)
+
+print('The maximum profit is:', profit)
+print('To achieve this profit, buy at index', buy_index, 'and sell at index', sell_index)
